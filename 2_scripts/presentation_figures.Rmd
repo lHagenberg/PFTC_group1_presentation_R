@@ -17,11 +17,25 @@ require(remotes)
 #remotes::install_github("Between-the-Fjords/dataDownloader")
 require(ggplot2)
 ```
-```{r}
+
+```{r github setup}
 use_git_config(
   user.name = "lhagenberg", 
   user.email = "l.hagenberg@live.com"
   )
+
+usethis::create_github_token() # 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
+
+gitcreds::gitcreds_set()
+
+git_vaccinate()
+```
+
+
+```{r github setup}
+usethis::use_git()
+
+use_github()
 ```
 
 

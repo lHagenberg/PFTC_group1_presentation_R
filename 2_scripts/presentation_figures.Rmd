@@ -1,0 +1,27 @@
+---
+title: "presentation_figures"
+author: "Liyenne"
+date: "2023-12-16"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r setup}
+library(usethis)
+require(tidyverse)
+#install.packages("remotes")
+require(remotes)
+#remotes::install_github("Between-the-Fjords/dataDownloader")
+require(ggplot2)
+```
+```{r}
+use_git_config(
+  user.name = "lhagenberg", 
+  user.email = "l.hagenberg@live.com"
+  )
+```
+
+

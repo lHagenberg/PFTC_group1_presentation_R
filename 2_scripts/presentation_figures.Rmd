@@ -10,32 +10,43 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r setup}
-library(usethis)
+require(usethis) 
 require(tidyverse)
 #install.packages("remotes")
 require(remotes)
 #remotes::install_github("Between-the-Fjords/dataDownloader")
 require(ggplot2)
+require(dataDownloader)
 ```
 
-```{r github setup}
-use_git_config(
-  user.name = "lhagenberg", 
-  user.email = "l.hagenberg@live.com"
-  )
+```{r initialize data}
+get_file(node = "hk2cy",
+         file = "PFTC_SA_clean_community_2023.csv",
+         path = "../1_input", 
+         remote_path = "community_data") 
 
-usethis::create_github_token() # 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
+com_data_full <- read.csv("../1_input/PFTC_SA_clean_community_2023.csv")
 
-gitcreds::gitcreds_set()
+com_data_pftc <- com_data_full %>% 
+  filter(is.na(treatment_only_for_range_x)) %>% 
+  select(!treatment_only_for_range_x)
 
-git_vaccinate()
+com_data_rangex <- com_data_pftc <- com_data_full %>% 
+  filter(!is.na(treatment_only_for_range_x)) 
+
+```
+
+```{r }
+com_data_pftc$plot_code <- paste0("s", com_data_pftc$site_id, "p", com_data_pftc$plot_id, com_data_pftc$aspect)
+
+com_data_pftc <- com_data_pftc %>% 
+  select(plot_code, date:plot_id, everything())
+
+meta_data_pftc <- com_data_pftc %>% 
+  select()
+  
 ```
 
 
-```{r github setup}
-usethis::use_git()
-
-use_github()
-```
 
 
